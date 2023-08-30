@@ -95,25 +95,36 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Detalles del Pedido con ID: ${widget.pedidoId}',
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 20),
-            const Text('Detalles del pedido:',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            Text('Total : ${pedidoData['pedido']['Total']}',
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            Text(
-              'Descripcion : ${pedidoData['pedido']['Descripcion']}',
-              style: const TextStyle(fontSize: 12),
-            ),
-            if (pedidoData.isNotEmpty)
+        body: SingleChildScrollView(
+    padding: const EdgeInsets.all(16.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Detalles del Pedido con ID: ${widget.pedidoId}',
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 20),
+        Text(
+          'Detalles del pedido:',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          'Total: ${pedidoData['pedido']['Total']}',
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          'Descripción: ${pedidoData['pedido']['Descripcion']}',
+          style: const TextStyle(fontSize: 16),
+        ),
+        if (pedidoData.isNotEmpty)
+          Column(
+            children: [
+              const SizedBox(height: 20),
+              // const Text(
+              //   'Detalles de los productos:',
+              //   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              // ),
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: pedidoData['detalles_pedidos'].length,
@@ -122,16 +133,25 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Nombre: ${pedido['Nombre']}'),
-                      Text('Cantidad : ${pedido['cantidad']}'),
-                      Text('precio unitario: ${pedido['precio_unitario']}'),
-                      // Text('Precio unitario: ${insumo['precio_unitario']}'),
-                      const Divider(), // Una línea divisoria entre cada insumo
+                      Text('Nombre: ${pedido['Nombre']}',
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                      Text('Cantidad: ${pedido['cantidad']}'),
+                      Text('Precio unitario: ${pedido['precio_unitario']}'),
+                      const Divider(),
                     ],
                   );
                 },
               ),
-            if (pedidoData.isNotEmpty)
+            ],
+          ),
+        if (pedidoData.isNotEmpty)
+          Column(
+            children: [
+              const SizedBox(height: 20),
+              // const Text(
+              //   'Detalles de personalizados:',
+              //   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              // ),
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: pedidoData['personalizados'].length,
@@ -143,17 +163,16 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Nombre: $nombre'),
+                        Text('Nombre: $nombre',
+                            style: const TextStyle(fontWeight: FontWeight.bold)),
                         Text('Insumos: ${personalizados['insumos']}'),
-                        for (var detallePersonalizado
-                            in pedidoData['personalizados']) ...[
+                        for (var detallePersonalizado in pedidoData['personalizados'])
                           if (detallePersonalizado['nombre'] == nombre)
-                            Text('datos: ${detallePersonalizado['datos']}'),
-                        ],
+                            Text('Datos: ${detallePersonalizado['datos']}'),
                         Text('Cantidad: ${personalizados['cantidad']}'),
                         Text('Descripción: ${personalizados['Descripción']}'),
                         Text('Subtotal: ${personalizados['Subtotal']}'),
-                        const Divider(), // Una línea divisoria entre cada entrada
+                        const Divider(),
                       ],
                     );
                   } else {
@@ -161,9 +180,11 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
                   }
                 },
               ),
-          ],
-        ),
-      ),
+            ],
+          ),
+      ],
+    ),
+  ),
     );
   }
 }

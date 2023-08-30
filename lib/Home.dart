@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Tropical Detox"),
-        actions: [
+        actions: const [
           // Iconos en la AppBar como antes
         ],
       ),
@@ -64,80 +64,82 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: Stack(
-        children: [
-          // Imagen de fondo como marca de agua
+       body: Stack(
+    children: [
+      // Imagen de fondo como marca de agua
 
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _OptionCard(
-                        imageAsset: 'assets/pedidos.png',
-                        text: 'Pedidos',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Pedido()),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      _OptionCard(
-                        imageAsset: 'assets/insumo.jpeg',
-                        text: 'Insumos',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Insumo()),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      _OptionCard(
-                        imageAsset: 'assets/ventas.jpeg',
-                        text: 'Ventas',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Ventas()),
-                          );
-                        },
-                      ),
-                    ],
+      Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: _OptionCard(
+                      imageAsset: 'assets/pedidos.png',
+                      text: 'Pedidos',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Pedido()),
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 20,
-            right: 20,
-            child: Container(
-              width: 150,
-              height: 150,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withOpacity(0.8),
+                  Expanded(
+                    child: _OptionCard(
+                      imageAsset: 'assets/insumo.jpeg',
+                      text: 'Insumos',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Insumo()),
+                        );
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: _OptionCard(
+                      imageAsset: 'assets/ventas.jpeg',
+                      text: 'Ventas',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Ventas()),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-              child: ClipOval(
-                child: Image.asset(
-                  'assets/logo.png', // Ruta de la imagen de marca de agua
-                  fit: BoxFit.cover,
-                ),
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+      Positioned(
+        bottom: 20,
+        right: 20,
+        child: Container(
+          width: 150,
+          height: 150,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white.withOpacity(0.8),
+          ),
+          child: ClipOval(
+            child: Image.asset(
+              'assets/logo.png', // Ruta de la imagen de marca de agua
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
     );
   }
 }

@@ -55,7 +55,7 @@ class _PedidoState extends State<Pedido> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-         appBar: AppBar(
+      appBar: AppBar(
         title: const Text("Tropical Detox"),
         actions: [
           // Iconos en la AppBar como antes
@@ -130,7 +130,8 @@ class _PedidoState extends State<Pedido> {
               ),
             ),
             for (var pedido in pedidos)
-              if (pedido['Estado'] != 'Finalizado')
+              if (pedido['Estado'] != 'Finalizado' &&
+                  pedido['Estado'] != 'Cancelado')
                 Card(
                   child: Column(
                     children: [
@@ -163,6 +164,51 @@ class _PedidoState extends State<Pedido> {
                                     return Colors.blue;
                                   }
                                   return Colors.blue;
+                                },
+                              ),
+                            ),
+                            child: Text(pedido['Estado']),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetallePedidoScreen(pedido['id']),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.add),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+            for (var pedido in pedidos)
+              if (pedido['Estado'] == 'Cancelado')
+                Card(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: Text(pedido['users']['name']),
+                        subtitle: Text(
+                          'Total: ${pedido['Total']} \nFecha: ${pedido['Fecha']} \nDirecion: ${pedido['Direcion']} ',
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              
+                            },
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color>(
+                                (states) {
+                                    return const Color.fromARGB(255, 182, 19, 28);
+                                 
                                 },
                               ),
                             ),
