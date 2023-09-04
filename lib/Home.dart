@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'Insumo/Insumo.dart';
 import 'Pedido/Pedido.dart';
 import 'Ventas/Ventas.dart';
-
-void main() => runApp(const MaterialApp(home: HomePage()));
+import 'login_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final BuildContext context;
+  final String accessToken;
+
+  const HomePage({
+    required this.context,
+    required this.accessToken,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +33,9 @@ class HomePage extends StatelessWidget {
               title: const Text("Inicio"),
               leading: const Icon(Icons.home),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
+                // Aquí puedes realizar alguna acción relacionada con la opción "Inicio"
+                // Por ejemplo, simplemente cerrar el menú lateral
+                Navigator.pop(context);
               },
             ),
             ListTile(
@@ -51,6 +58,7 @@ class HomePage extends StatelessWidget {
                 );
               },
             ),
+
             ListTile(
               title: const Text("Ventas"),
               leading: const Icon(Icons.attach_money),
@@ -59,6 +67,15 @@ class HomePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => const Ventas()),
                 );
+              },
+            ),
+
+            ListTile(
+              title: const Text("Cerrar Sesión"),
+              leading: const Icon(Icons.attach_money),
+              onTap: () {
+                logout(
+                    accessToken, context); // Pasa el accessToken y el context
               },
             ),
           ],
@@ -180,4 +197,48 @@ class _OptionCard extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> logout(String accessToken, BuildContext context) async {
+  final url = Uri.parse('http://127.0.0.1:8000/api/logout');
+
+  try {
+    final response = await http.post(
+      url,
+      headers: {'Authorization': 'Bearer $accessToken'},
+    );
+
+    if (response.statusCode == 200) {
+      // Redirige al usuario a la página de inicio de sesión
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+    } else {
+      final error = jsonDecode(response.body)['message'];
+      _showErrorDialog(context, error);
+    }
+  } catch (error) {
+    print('Error al cerrar la sesión: $error');
+  }
+}
+
+void _showErrorDialog(BuildContext context, String error) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Error al cerrar la sesión'),
+        content: Text(error),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Cerrar'),
+          ),
+        ],
+      );
+    },
+  );
 }

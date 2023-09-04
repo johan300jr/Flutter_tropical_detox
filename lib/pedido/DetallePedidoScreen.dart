@@ -56,10 +56,8 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
               title: const Text("Inicio"),
               leading: const Icon(Icons.home),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
+                // Cierra el menú lateral al tocar la opción "Inicio"
+                Navigator.pop(context);
               },
             ),
             ListTile(
