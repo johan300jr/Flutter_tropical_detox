@@ -37,7 +37,7 @@ class _InsumoState extends State<Insumo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         title: const Text("Tropical Detox"),
         actions: [
           // Iconos en la AppBar como antes
@@ -51,10 +51,8 @@ class _InsumoState extends State<Insumo> {
               title: const Text("Inicio"),
               leading: const Icon(Icons.home),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
+                // Cierra el menú lateral al tocar la opción "Inicio"
+                Navigator.pop(context);
               },
             ),
             ListTile(
@@ -94,7 +92,7 @@ class _InsumoState extends State<Insumo> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-             Center(
+            Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                     vertical: 20), // Agregando espacio vertical

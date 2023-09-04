@@ -54,15 +54,13 @@ class _DetalleVentasScreenState extends State<DetalleVentasScreen> {
           children: [
             // Aquí puedes agregar los elementos del menú lateral
             ListTile(
-              title: const Text("Inicio"),
-              leading: const Icon(Icons.home),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
-              },
-            ),
+  title: const Text("Inicio"),
+  leading: const Icon(Icons.home),
+  onTap: () {
+    // Cierra el menú lateral al tocar la opción "Inicio"
+    Navigator.pop(context);
+  },
+),
             ListTile(
               title: const Text("Pedido"),
               leading: const Icon(Icons.assignment),

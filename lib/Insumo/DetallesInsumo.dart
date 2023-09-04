@@ -41,7 +41,7 @@ class _DetallesInsumoState extends State<DetallesInsumo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         title: const Text("Tropical Detox"),
         actions: [
           // Iconos en la AppBar como antes
@@ -55,10 +55,8 @@ class _DetallesInsumoState extends State<DetallesInsumo> {
               title: const Text("Inicio"),
               leading: const Icon(Icons.home),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
+                // Cierra el menú lateral al tocar la opción "Inicio"
+                Navigator.pop(context);
               },
             ),
             ListTile(
