@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Appbar.dart';
+import 'package:flutter_application_1/Drawer2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -42,56 +44,10 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tropical Detox"),
-        actions: [
-          // Iconos en la AppBar como antes
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            // Aquí puedes agregar los elementos del menú lateral
-            ListTile(
-              title: const Text("Inicio"),
-              leading: const Icon(Icons.home),
-              onTap: () {
-                // Cierra el menú lateral al tocar la opción "Inicio"
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text("Pedido"),
-              leading: const Icon(Icons.assignment),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Pedido()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Insumo"),
-              leading: const Icon(Icons.inventory),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Insumo()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Ventas"),
-              leading: const Icon(Icons.attach_money),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Ventas()),
-                );
-              },
-            ),
-          ],
-        ),
+      appBar: const CustomAppBar(title: "Detalle de pedido"),
+      drawer: MyDrawer2(
+        context: context,
+        accessToken: 'accessToken',
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -146,7 +102,7 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
                         for (var detallePersonalizado
                             in pedidoData['personalizados']) ...[
                           if (detallePersonalizado['nombre'] == nombre)
-                            Text('datos: ${detallePersonalizado['datos']}'),
+                            Text(': ${detallePersonalizado['datos']}'),
                         ],
                         Text('Cantidad: ${personalizados['cantidad']}'),
                         Text('Descripción: ${personalizados['Descripción']}'),

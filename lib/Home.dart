@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Appbar.dart';
+import 'package:flutter_application_1/Drawer.dart';
+// import 'package:flutter_application_1/Menu.dart';
 import 'Insumo/Insumo.dart';
 import 'Pedido/Pedido.dart';
 import 'Ventas/Ventas.dart';
@@ -7,8 +10,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class HomePage extends StatelessWidget {
-  final BuildContext context;
   final String accessToken;
+  final BuildContext context;
 
   const HomePage({
     required this.context,
@@ -19,67 +22,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tropical Detox"),
-        actions: [
-          // Iconos en la AppBar como antes
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            // Aquí puedes agregar los elementos del menú lateral
-            ListTile(
-              title: const Text("Inicio"),
-              leading: const Icon(Icons.home),
-              onTap: () {
-                // Aquí puedes realizar alguna acción relacionada con la opción "Inicio"
-                // Por ejemplo, simplemente cerrar el menú lateral
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text("Pedido"),
-              leading: const Icon(Icons.assignment),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Pedido()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Insumo"),
-              leading: const Icon(Icons.inventory),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Insumo()),
-                );
-              },
-            ),
-
-            ListTile(
-              title: const Text("Ventas"),
-              leading: const Icon(Icons.attach_money),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Ventas()),
-                );
-              },
-            ),
-
-            ListTile(
-              title: const Text("Cerrar Sesión"),
-              leading: const Icon(Icons.attach_money),
-              onTap: () {
-                logout(
-                    accessToken, context); // Pasa el accessToken y el context
-              },
-            ),
-          ],
-        ),
+      appBar: const CustomAppBar(title: "Tropical detox"),
+      drawer: MyDrawer(
+        accessToken: accessToken,
+        context: context,
       ),
       body: Stack(
         children: [
