@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Appbar.dart';
+import 'package:flutter_application_1/Drawer2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -41,69 +43,57 @@ class _DetallesInsumoState extends State<DetallesInsumo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tropical Detox"),
-        actions: [
-          // Iconos en la AppBar como antes
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            // Aquí puedes agregar los elementos del menú lateral
-            ListTile(
-              title: const Text("Inicio"),
-              leading: const Icon(Icons.home),
-              onTap: () {
-                // Cierra el menú lateral al tocar la opción "Inicio"
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text("Pedido"),
-              leading: const Icon(Icons.assignment),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Pedido()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Insumo"),
-              leading: const Icon(Icons.inventory),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Insumo()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Ventas"),
-              leading: const Icon(Icons.attach_money),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Ventas()),
-                );
-              },
-            ),
-          ],
-        ),
+      appBar: const CustomAppBar(title: "Detalle de Insumo"),
+      drawer: MyDrawer2(
+        context: context,
+        accessToken: 'accessToken',
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('ID: ${insumoData['id']}'),
-            Text('Nombre: ${insumoData['nombre']}'),
-            Text('Cantidad Disponible: ${insumoData['cantidad_disponible']}'),
-            Text('Unidad de Medida: ${insumoData['unidad_medida']}'),
-            Text('Precio Unitario: ${insumoData['precio_unitario']}'),
-            Text('Fecha de Creación: ${insumoData['created_at']}'),
-            Text('Última Actualización: ${insumoData['updated_at']}'),
+            // const Text(
+            //   'Detalle de Insumo',
+            //   style: TextStyle(
+            //     fontSize: 24,
+            //     fontWeight: FontWeight.bold,
+            //     color: Colors.black,
+            //   ),
+            // ),
+            const SizedBox(height: 20),
+            Text(
+              'Nombre: ${insumoData['nombre']}',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Cantidad Disponible: ${insumoData['cantidad_disponible']}',
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Unidad de Medida: ${insumoData['unidad_medida']}',
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Precio Unitario: \$${insumoData['precio_unitario']}',
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Fecha de Creación: ${insumoData['created_at']}',
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Última Actualización: ${insumoData['updated_at']}',
+              style: const TextStyle(fontSize: 16),
+            ),
           ],
         ),
       ),

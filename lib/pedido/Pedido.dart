@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Appbar.dart';
+import 'package:flutter_application_1/Drawer2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -52,59 +54,22 @@ class _PedidoState extends State<Pedido> {
     }
   }
 
+  void _verDetallePedido(int pedidoId) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetallePedidoScreen(pedidoId),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tropical Detox"),
-        actions: [
-          // Iconos en la AppBar como antes
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            // Aquí puedes agregar los elementos del menú lateral
-            ListTile(
-              title: const Text("Inicio"),
-              leading: const Icon(Icons.home),
-              onTap: () {
-                // Cierra el menú lateral al tocar la opción "Inicio"
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text("Pedido"),
-              leading: const Icon(Icons.assignment),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Pedido()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Insumo"),
-              leading: const Icon(Icons.inventory),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Insumo()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Ventas"),
-              leading: const Icon(Icons.attach_money),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Ventas()),
-                );
-              },
-            ),
-          ],
-        ),
+      appBar: const CustomAppBar(title: "Pedidos"),
+      drawer: MyDrawer2(
+        context: context,
+        accessToken: 'accessToken',
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -129,58 +94,75 @@ class _PedidoState extends State<Pedido> {
             ),
             for (var pedido in pedidos)
               if (pedido['Estado'] != 'Finalizado')
-                Card(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: Text(pedido['users']['name']),
-                        subtitle: Text(
-                          'Total: ${pedido['Total']} \nFecha: ${pedido['Fecha']} \nDirecion: ${pedido['Direcion']} ',
+                GestureDetector(
+                  onTap: () {
+                    _verDetallePedido(pedido['id']);
+                  },
+                  child: Card(
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text(pedido['users']['name']),
+                          subtitle: Text(
+                            'Total: ${pedido['Total']} \nFecha: ${pedido['Fecha']} \nDirección: ${pedido['Direcion']} ',
+                          ),
                         ),
-                      ),
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              if (pedido['Estado'] == 'Terminados') {
-                                _cambiarEstadoPedido(
-                                    pedido['id'], 'Finalizado');
-                              } else if (pedido['Estado'] == 'En_proceso') {
-                                _cambiarEstadoPedido(
-                                    pedido['id'], 'Terminados');
-                              }
-                            },
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.resolveWith<Color>(
-                                (states) {
-                                  if (pedido['Estado'] == 'Terminados') {
-                                    return const Color.fromARGB(
-                                        255, 55, 204, 55);
-                                  } else if (pedido['Estado'] == 'En_proceso') {
-                                    return Colors.blue;
-                                  }
-                                  return Colors.blue;
-                                },
-                              ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child:
+                                  Container(), // Espacio vacío que ocupa el espacio izquierdo
                             ),
-                            child: Text(pedido['Estado']),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      DetallePedidoScreen(pedido['id']),
+                            ElevatedButton(
+                              onPressed: () {
+                                if (pedido['Estado'] == 'Terminados') {
+                                  _cambiarEstadoPedido(
+                                      pedido['id'], 'Finalizado');
+                                } else if (pedido['Estado'] == 'En_proceso') {
+                                  _cambiarEstadoPedido(
+                                      pedido['id'], 'Terminados');
+                                }
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.resolveWith<Color>(
+                                  (states) {
+                                    if (pedido['Estado'] == 'Terminados') {
+                                      return const Color.fromARGB(
+                                          255, 55, 204, 55);
+                                    } else if (pedido['Estado'] ==
+                                        'En_proceso') {
+                                      return Colors.blue;
+                                    }
+                                    return Colors.blue;
+                                  },
                                 ),
-                              );
-                            },
-                            icon: const Icon(Icons.add),
-                          ),
-                        ],
-                      ),
-                    ],
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        3.0), // Establece el radio a 3
+                                  ),
+                                ),
+                              ),
+                              child: Text(pedido['Estado']),
+                            ),
+                            // IconButton(
+                            //   onPressed: () {
+                            //     Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //         builder: (context) =>
+                            //             DetallePedidoScreen(pedido['id']),
+                            //       ),
+                            //     );
+                            //   },
+                            //   icon: const Icon(Icons.add),
+                            // ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
           ],

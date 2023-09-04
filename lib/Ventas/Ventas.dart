@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Appbar.dart';
+import 'package:flutter_application_1/Drawer2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-import '../Home.dart';
-import '../Insumo/Insumo.dart';
 import '../Pedido/DetallePedidoScreen.dart';
-import '../Pedido/Pedido.dart';
 import 'DetalleVentasScreen.dart';
 
 class Ventas extends StatefulWidget {
@@ -40,56 +38,10 @@ class _VentasState extends State<Ventas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tropical Detox"),
-        actions: [
-          // Iconos en la AppBar como antes
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            // Aquí puedes agregar los elementos del menú lateral
-            ListTile(
-              title: const Text("Inicio"),
-              leading: const Icon(Icons.home),
-              onTap: () {
-                // Cierra el menú lateral al tocar la opción "Inicio"
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text("Pedido"),
-              leading: const Icon(Icons.assignment),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Pedido()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Insumo"),
-              leading: const Icon(Icons.inventory),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Insumo()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text("Ventas"),
-              leading: const Icon(Icons.attach_money),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Ventas()),
-                );
-              },
-            ),
-          ],
-        ),
+      appBar: const CustomAppBar(title: "Ventas"),
+      drawer: MyDrawer2(
+        context: context,
+        accessToken: 'accessToken',
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -102,7 +54,7 @@ class _VentasState extends State<Ventas> {
                 child: Title(
                   color: const Color.fromARGB(255, 0, 0, 0),
                   child: const Text(
-                    'Pedidos',
+                    'Ventas',
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -115,31 +67,42 @@ class _VentasState extends State<Ventas> {
             for (var pedido in pedidos)
               if (pedido['Estado'] != 'Finalizado')
                 Card(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: Text(pedido['users']['name']),
-                        subtitle: Text(
-                          'Total: ${pedido['Total']} \nFecha: ${pedido['Fecha']} \nDirecion: ${pedido['Direcion']} ',
+                  elevation: 5, // Sombra para la tarjeta
+                  margin: const EdgeInsets.all(
+                      10), // Márgenes alrededor de la tarjeta
+                  child: InkWell(
+                    // Hace que la tarjeta sea clicle
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DetalleVentasScreen(pedido['id']),
                         ),
-                      ),
-                      Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      DetalleVentasScreen(pedido['id']),
-                                ),
-                              );
-                            },
-                            icon: const Icon(Icons.add),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text(pedido['users']['name']),
+                          subtitle: Text(
+                            'Total: ${pedido['Total']} \nFecha: ${pedido['Fecha']} \nDirección: ${pedido['Direcion']} ',
                           ),
-                        ],
-                      ),
-                    ],
+                        ),
+                        // const Padding(
+                        //   padding: EdgeInsets.all(1.0),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.end,
+                        //     children: [
+                        //       Icon(
+                        //         Icons.arrow_forward_ios,
+                        //         color: Colors.blue,
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                      ],
+                    ),
                   ),
                 ),
           ],
