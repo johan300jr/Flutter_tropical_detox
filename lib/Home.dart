@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Appbar.dart';
-import 'package:flutter_application_1/Drawer.dart';
 // import 'package:flutter_application_1/Menu.dart';
 import 'Insumo/Insumo.dart';
 import 'Pedido/Pedido.dart';
@@ -8,6 +7,16 @@ import 'Ventas/Ventas.dart';
 import 'login_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Appbar.dart';
+import 'package:flutter_application_1/Drawer2.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import '../Insumo/Insumo.dart';
+import '../Ventas/Ventas.dart';
+import '../home.dart';
 
 class HomePage extends StatelessWidget {
   final String accessToken;
@@ -22,80 +31,73 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Tropical detox"),
-      drawer: MyDrawer(
+      appBar: CustomAppBar(title: "Tropical detox"),
+      drawer: MyDrawer2(
         accessToken: accessToken,
         context: context,
       ),
       body: Stack(
         children: [
+          // Título "Tropical Detox"
           // Imagen de fondo como marca de agua
-
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _OptionCard(
-                        imageAsset: 'assets/pedidos.png',
-                        text: 'Pedidos',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Pedido()),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      _OptionCard(
-                        imageAsset: 'assets/insumo.jpeg',
-                        text: 'Insumos',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Insumo()),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      _OptionCard(
-                        imageAsset: 'assets/ventas.jpeg',
-                        text: 'Ventas',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Ventas()),
-                          );
-                        },
-                      ),
-                    ],
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Resto del contenido
+                  FractionallySizedBox(
+                    widthFactor: 0.8,
+                    child: _OptionCard(
+                      text: 'Pedidos',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Pedido(),
+                          ),
+                        );
+                      },
+                      color: Color.fromARGB(206, 89, 236, 60), // Color verde suave
+                      imageAsset: 'assets/pedidos1.png', // Imagen para Pedidos
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 20,
-            right: 20,
-            child: Container(
-              width: 150,
-              height: 150,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withOpacity(0.8),
-              ),
-              child: ClipOval(
-                child: Image.asset(
-                  'assets/logo.png', // Ruta de la imagen de marca de agua
-                  fit: BoxFit.cover,
-                ),
+                  const SizedBox(height: 20),
+                  FractionallySizedBox(
+                    widthFactor: 0.8,
+                    child: _OptionCard(
+                      text: 'Insumos',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Insumo(),
+                          ),
+                        );
+                      },
+                      color: Color.fromARGB(197, 209, 238, 46), // Color amarillo suave
+                      imageAsset: 'assets/insumos1.png', // Imagen para Insumos
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  FractionallySizedBox(
+                    widthFactor: 0.8,
+                    child: _OptionCard(
+                      text: 'Ventas',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Ventas(),
+                          ),
+                        );
+                      },
+                      color: Color.fromARGB(207, 245, 154, 35), // Color naranja suave
+                      imageAsset: 'assets/ventas1.png', // Imagen para Ventas
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -106,39 +108,63 @@ class HomePage extends StatelessWidget {
 }
 
 class _OptionCard extends StatelessWidget {
-  final String imageAsset;
   final String text;
   final VoidCallback onTap;
+  final Color color;
+  final String imageAsset;
 
   const _OptionCard({
-    required this.imageAsset,
     required this.text,
     required this.onTap,
+    required this.color,
+    required this.imageAsset,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          children: [
-            Image.asset(
-              imageAsset,
-              width: 120,
-              height: 120,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 4,
+              offset: Offset(0, 2),
             ),
-            const SizedBox(height: 10),
-            Text(
-              text,
-              style: const TextStyle(fontSize: 20),
-            ),
-            const SizedBox(height: 10),
           ],
+          color: color,
+        ),
+        child: FractionallySizedBox(
+          widthFactor: 1.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Image.asset(
+                  imageAsset,
+                  width: 120,
+                  height: 120,
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: Text(
+                    text.toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

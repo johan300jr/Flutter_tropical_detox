@@ -99,6 +99,18 @@ class MyDrawer2 extends StatelessWidget {
                 );
               },
             ),
+            ListTile(
+              title: const Text("Cerrar Sesión"),
+              leading: const Icon(Icons.exit_to_app),
+              onTap: () {
+                // Lógica para cerrar sesión aquí
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  LoginPage()),
+                );
+              },
+            ),
+
             // ListTile(
             //   title: const Text("Cerrar Sesión"),
             //   leading: const Icon(Icons.exit_to_app, color: Colors.white),
