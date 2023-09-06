@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Home.dart';
 import 'package:flutter_application_1/Insumo/Insumo.dart';
 import 'package:flutter_application_1/Ventas/Ventas.dart';
+import 'package:flutter_application_1/login_page.dart';
 import 'package:flutter_application_1/pedido/Pedido.dart';
 
 class Appbar extends StatelessWidget {
@@ -11,7 +12,7 @@ class Appbar extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Tropical Detox"),
-        actions: const [
+        actions:  [
           IconButton(
             icon:
                 Icon(Icons.menu), // Puedes usar cualquier ícono de tu elección
@@ -69,8 +70,10 @@ class Appbar extends StatelessWidget {
               leading: const Icon(Icons.exit_to_app),
               onTap: () {
                 // Lógica para cerrar sesión aquí
-                Navigator.pop(context); // Cerrar el menú lateral
-                logout(accessToken, context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  LoginPage()),
+                );
               },
             ),
           ],
