@@ -6,6 +6,8 @@ import 'dart:convert';
 import '../Pedido/DetallePedidoScreen.dart';
 import 'DetalleVentasScreen.dart';
 
+import 'package:flutter_application_1/Appbar2.dart';
+
 class Ventas extends StatefulWidget {
   const Ventas({Key? key});
 
@@ -43,11 +45,7 @@ class _VentasState extends State<Ventas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Ventas"),
-      drawer: MyDrawer2(
-        context: context,
-        accessToken: 'accessToken',
-      ),
+      appBar: const CustomAppBar2(title: ""),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -60,9 +58,9 @@ class _VentasState extends State<Ventas> {
                 child: Title(
                   color: const Color.fromARGB(255, 0, 0, 0),
                   child: const Text(
-                    'Ventas',
+                    'VENTAS',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),

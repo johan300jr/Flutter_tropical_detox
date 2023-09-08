@@ -3,6 +3,8 @@ import 'package:flutter_application_1/Appbar.dart';
 import 'package:flutter_application_1/Drawer2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_application_1/Appbar2.dart';
+
 
 import '../Insumo/Insumo.dart';
 import '../Ventas/Ventas.dart';
@@ -44,11 +46,8 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Detalle de pedido"),
-      drawer: MyDrawer2(
-        context: context,
-        accessToken: 'accessToken',
-      ),
+      appBar: const CustomAppBar2(title: "Detalle de pedido"),
+     
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
