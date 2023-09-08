@@ -3,11 +3,11 @@ import 'package:flutter_application_1/Appbar.dart';
 import 'package:flutter_application_1/Drawer2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import '../Home.dart';
 import '../Pedido/Pedido.dart';
 import '../Ventas/Ventas.dart';
 import 'Insumo.dart';
+import 'package:flutter_application_1/Appbar2.dart';
 
 class DetallesInsumo extends StatefulWidget {
   final int insumoId;
@@ -43,11 +43,8 @@ class _DetallesInsumoState extends State<DetallesInsumo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Detalle de Insumo"),
-      drawer: MyDrawer2(
-        context: context,
-        accessToken: 'accessToken',
-      ),
+      appBar: const CustomAppBar2(title: "Detalle de Insumo"),
+      
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

@@ -3,8 +3,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'Home.dart';
 
-
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -138,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
         ElevatedButton(
           onPressed: login,
           child: Container(
-            height: 30,
+            height: 50, // Aumenta la altura del botón a 50
             child: Center(
               child: Text(
                 "Acceder",
@@ -278,8 +276,8 @@ class _SolicitarCorreoPageState extends State<SolicitarCorreoPage> {
     }
 
     // Verificar el formato del correo electrónico usando una expresión regular
-    bool isEmailValid = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-        .hasMatch(email);
+    bool isEmailValid =
+        RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$').hasMatch(email);
 
     if (!isEmailValid) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -329,7 +327,7 @@ class _SolicitarCorreoPageState extends State<SolicitarCorreoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green[50], // Fondo verde
+        backgroundColor: Color.fromARGB(216, 27, 26, 26), // Fondo verde
         elevation: 0, // Sin sombra
       ),
       body: Center(
@@ -361,6 +359,9 @@ class _SolicitarCorreoPageState extends State<SolicitarCorreoPage> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: solicitarCodigo,
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 32, 33, 34), // Color de fondo personalizado
+                  ),
                   child: Text(
                     'Solicitar Código',
                     style: TextStyle(
@@ -379,12 +380,11 @@ class _SolicitarCorreoPageState extends State<SolicitarCorreoPage> {
   }
 }
 
-
-
 class VerificarCodigoPage extends StatefulWidget {
   final String email; // Variable para almacenar el correo electrónico
 
-  VerificarCodigoPage({required this.email}); // Constructor que recibe el correo
+  VerificarCodigoPage(
+      {required this.email}); // Constructor que recibe el correo
 
   @override
   _VerificarCodigoPageState createState() => _VerificarCodigoPageState();
@@ -433,7 +433,8 @@ class _VerificarCodigoPageState extends State<VerificarCodigoPage> {
           content: Text('Codigo invalido'),
         ),
       );
-      return; ;
+      return;
+      ;
     }
   }
 
@@ -441,7 +442,7 @@ class _VerificarCodigoPageState extends State<VerificarCodigoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green[50], // Fondo verde
+        backgroundColor: Color.fromARGB(216, 27, 26, 26), // Fondo verde
         elevation: 0, // Sin sombra
       ),
       body: Center(
@@ -458,22 +459,22 @@ class _VerificarCodigoPageState extends State<VerificarCodigoPage> {
                 "Tropical Detox",
                 style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
               ),
-
               Text("Ingresa el código de recuperación enviado a tu correo."),
-
               SizedBox(height: 40),
               TextField(
                 controller: codigoController,
-                decoration: InputDecoration(labelText: 'Código de Recuperación'),
+                decoration:
+                    InputDecoration(labelText: 'Código de Recuperación'),
               ),
-
               SizedBox(height: 20),
-
               Container(
                 width: 200,
                 height: 50,
                 child: ElevatedButton(
                   onPressed: verificarCodigo,
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 32, 33, 34), // Color de fondo personalizado
+                  ),
                   child: Text(
                     'Verificar',
                     style: TextStyle(
@@ -536,11 +537,11 @@ class _CambiarContrasenaPageState extends State<CambiarContrasenaPage> {
     }
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green[50], // Fondo verde
+        backgroundColor: Color.fromARGB(216, 27, 26, 26), // Fondo verde
         elevation: 0, // Sin sombra
       ),
       body: Center(
@@ -558,7 +559,7 @@ class _CambiarContrasenaPageState extends State<CambiarContrasenaPage> {
                 style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 40),
-               // Espacio flexible para empujar hacia arriba
+              // Espacio flexible para empujar hacia arriba
               Text("Crea una nueva contraseña para tu cuenta."),
               SizedBox(height: 40),
               TextField(
@@ -578,6 +579,9 @@ class _CambiarContrasenaPageState extends State<CambiarContrasenaPage> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: cambiarContrasena,
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 32, 33, 34), // Color de fondo personalizado
+                  ),
                   child: Text(
                     'Cambiar Contraseña',
                     style: TextStyle(

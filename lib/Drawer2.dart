@@ -43,45 +43,77 @@ class MyDrawer2 extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Nombre de Usuario",
+                    "Juan",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 0, 0, 0),
                       fontSize: 20,
                     ),
                   ),
-                  Text(
-                    "Correo Electrónico",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
-                  ),
+                  // Text(
+                  //   "Admin@gmail.com",
+                  //   style: TextStyle(
+                  //     color: Colors.white,
+                  //     fontSize: 16,
+                  //   ),
+                  // ),
                 ],
               ),
             ),
             ListTile(
-              title: const Text("Inicio"),
-              leading: const Icon(Icons.home, color: Colors.white),
+              title: Text(
+                "Inicio",
+                style: TextStyle(
+                  fontSize: 20, // Tamaño de fuente personalizado
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ),
+              leading: Icon(
+                Icons.home,
+                color: Colors.white,
+                size: 35, // Tamaño de icono personalizado
+              ),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HomePage(context: context, accessToken: 'accessToken',)),
+                  MaterialPageRoute(
+                      builder: (context) => HomePage(
+                          context: context, accessToken: 'accessToken')),
                 );
               },
             ),
             ListTile(
-              title: const Text("Pedido"),
-              leading: const Icon(Icons.assignment, color: Colors.white),
+              title: Text(
+                "Pedidos",
+                style: TextStyle(
+                  fontSize: 20, // Tamaño de fuente personalizado
+                  color: const Color.fromARGB(255, 2, 0, 0),
+                ),
+              ),
+              leading: Icon(
+                Icons.assignment,
+                color: Colors.white,
+                size: 35, // Tamaño de icono personalizado
+              ),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Pedido()),
+                  MaterialPageRoute(builder: (context) => Pedido()),
                 );
               },
             ),
             ListTile(
-              title: const Text("Insumo"),
-              leading: const Icon(Icons.inventory, color: Colors.white),
+              title: Text(
+                "Insumos",
+                style: TextStyle(
+                  fontSize: 20, // Tamaño de fuente personalizado
+                  color: const Color.fromARGB(255, 0, 0, 0),
+                ),
+              ),
+              leading: Icon(
+                Icons.inventory,
+                color: Colors.white,
+                size: 35, // Tamaño de icono personalizado
+              ),
               onTap: () {
                 Navigator.push(
                   context,
@@ -90,23 +122,43 @@ class MyDrawer2 extends StatelessWidget {
               },
             ),
             ListTile(
-              title: const Text("Ventas"),
-              leading: const Icon(Icons.attach_money, color: Colors.white),
+              title: Text(
+                "Ventas",
+                style: TextStyle(
+                  fontSize: 20, // Tamaño de fuente personalizado
+                  color: const Color.fromARGB(255, 10, 0, 0),
+                ),
+              ),
+              leading: Icon(
+                Icons.attach_money,
+                color: Colors.white,
+                size: 35, // Tamaño de icono personalizado
+              ),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Ventas()),
+                  MaterialPageRoute(builder: (context) => Ventas()),
                 );
               },
             ),
             ListTile(
-              title: const Text("Cerrar Sesión"),
-              leading: const Icon(Icons.exit_to_app),
+              title: Text(
+                "Cerrar Sesión",
+                style: TextStyle(
+                  fontSize: 20, // Tamaño de fuente personalizado
+                  color: const Color.fromARGB(255, 19, 0, 0),
+                ),
+              ),
+              leading: Icon(
+                Icons.exit_to_app,
+                color: Colors.white,
+                size: 35, // Tamaño de icono personalizado
+              ),
               onTap: () {
                 // Lógica para cerrar sesión aquí
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>  LoginPage()),
+                  MaterialPageRoute(builder: (context) => LoginPage()),
                 );
               },
             ),

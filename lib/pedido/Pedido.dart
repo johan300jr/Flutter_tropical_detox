@@ -3,6 +3,7 @@ import 'package:flutter_application_1/Appbar.dart';
 import 'package:flutter_application_1/Drawer2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_application_1/Appbar2.dart';
 
 import '../../home.dart';
 import '../Insumo/Insumo.dart';
@@ -66,11 +67,8 @@ class _PedidoState extends State<Pedido> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "Pedidos"),
-      drawer: MyDrawer2(
-        context: context,
-        accessToken: 'accessToken',
-      ),
+      appBar: const CustomAppBar2(title: ""),
+      
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -82,9 +80,9 @@ class _PedidoState extends State<Pedido> {
                 child: Title(
                   color: const Color.fromARGB(255, 0, 0, 0),
                   child: const Text(
-                    'Pedidos',
+                    'PEDIDOS',
                     style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: Colors
                             .black), // Tamaño de fuente y color actualizados
