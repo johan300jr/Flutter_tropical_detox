@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'Home.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -101,56 +102,60 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _inputField() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        TextField(
-          controller: emailController,
-          decoration: InputDecoration(
-            hintText: "Email",
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide.none,
+    return SingleChildScrollView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextField(
+            controller: emailController,
+            decoration: InputDecoration(
+              hintText: "Correo",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: BorderSide.none,
+              ),
+              fillColor: Colors.green[100],
+              filled: true,
+              prefixIcon: Icon(Icons.person),
             ),
-            fillColor: Colors.green[100],
-            filled: true,
-            prefixIcon: Icon(Icons.person),
           ),
-        ),
-        SizedBox(height: 20),
-        TextField(
-          controller: passwordController,
-          decoration: InputDecoration(
-            hintText: "Password",
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide.none,
+          SizedBox(height: 20),
+          TextField(
+            controller: passwordController,
+            decoration: InputDecoration(
+              hintText: "Contraseña",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: BorderSide.none,
+              ),
+              fillColor: Colors.green[100],
+              filled: true,
+              prefixIcon: Icon(Icons.lock),
             ),
-            fillColor: Colors.green[100],
-            filled: true,
-            prefixIcon: Icon(Icons.lock),
+            obscureText: true,
+            autofocus: false, // Evita que aparezca el teclado automáticamente
           ),
-          obscureText: true,
-        ),
-        SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: login,
-          child: Container(
-            height: 50, // Aumenta la altura del botón a 50
-            child: Center(
-              child: Text(
-                "Acceder",
-                style: TextStyle(fontSize: 20),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: login,
+            child: Container(
+              height: 50, // Aumenta la altura del botón a 50
+              child: Center(
+                child: Text(
+                  "Acceder",
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
             ),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.black,
+              onPrimary: Colors.white,
+              shape: StadiumBorder(),
+            ),
           ),
-          style: ElevatedButton.styleFrom(
-            primary: Colors.black,
-            onPrimary: Colors.white,
-            shape: StadiumBorder(),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -167,19 +172,21 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          margin: EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _header(),
-              _inputField(),
-              _forgotPassword(),
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.all(24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _header(),
+                _inputField(),
+                _forgotPassword(),
+                // Agrega más widgets si es necesario
+              ],
+            ),
           ),
         ),
       ),
@@ -360,7 +367,8 @@ class _SolicitarCorreoPageState extends State<SolicitarCorreoPage> {
                 child: ElevatedButton(
                   onPressed: solicitarCodigo,
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 32, 33, 34), // Color de fondo personalizado
+                    primary: Color.fromARGB(
+                        255, 32, 33, 34), // Color de fondo personalizado
                   ),
                   child: Text(
                     'Solicitar Código',
@@ -473,7 +481,8 @@ class _VerificarCodigoPageState extends State<VerificarCodigoPage> {
                 child: ElevatedButton(
                   onPressed: verificarCodigo,
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 32, 33, 34), // Color de fondo personalizado
+                    primary: Color.fromARGB(
+                        255, 32, 33, 34), // Color de fondo personalizado
                   ),
                   child: Text(
                     'Verificar',
@@ -580,7 +589,8 @@ class _CambiarContrasenaPageState extends State<CambiarContrasenaPage> {
                 child: ElevatedButton(
                   onPressed: cambiarContrasena,
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 32, 33, 34), // Color de fondo personalizado
+                    primary: Color.fromARGB(
+                        255, 32, 33, 34), // Color de fondo personalizado
                   ),
                   child: Text(
                     'Cambiar Contraseña',
