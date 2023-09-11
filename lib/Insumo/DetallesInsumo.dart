@@ -44,53 +44,67 @@ class _DetallesInsumoState extends State<DetallesInsumo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar2(title: "Detalle de Insumo"),
-      
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // const Text(
-            //   'Detalle de Insumo',
-            //   style: TextStyle(
-            //     fontSize: 24,
-            //     fontWeight: FontWeight.bold,
-            //     color: Colors.black,
-            //   ),
-            // ),
             const SizedBox(height: 20),
-            Text(
-              'Nombre: ${insumoData['nombre']}',
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            const Center(
+              child: Text(
+                'Detalle de Insumo',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
               ),
             ),
-            const SizedBox(height: 10),
-            Text(
-              'Cantidad Disponible: ${insumoData['cantidad_disponible']}',
-              style: const TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Unidad de Medida: ${insumoData['unidad_medida']}',
-              style: const TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Precio Unitario: \$${insumoData['precio_unitario']}',
-              style: const TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Fecha de Creación: ${insumoData['created_at']}',
-              style: const TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Última Actualización: ${insumoData['updated_at']}',
-              style: const TextStyle(fontSize: 16),
-            ),
+            const SizedBox(height: 20),
+            Card(
+              elevation: 2,
+              margin: const EdgeInsets.all(16.0),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Nombre: ${insumoData['nombre']}',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Cantidad Disponible: ${insumoData['cantidad_disponible']}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Unidad de Medida: ${insumoData['unidad_medida']}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Precio Unitario: \$${insumoData['precio_unitario']}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Fecha de Creación: ${insumoData['created_at']}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Última Actualización: ${insumoData['updated_at']}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

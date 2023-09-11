@@ -60,14 +60,14 @@ class MyDrawer2 extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: Text(
+              title: const Text(
                 "Inicio",
                 style: TextStyle(
                   fontSize: 20, // Tamaño de fuente personalizado
                   color: Color.fromARGB(255, 0, 0, 0),
                 ),
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.home,
                 color: Colors.white,
                 size: 35, // Tamaño de icono personalizado
@@ -81,35 +81,16 @@ class MyDrawer2 extends StatelessWidget {
                 );
               },
             ),
+
             ListTile(
-              title: Text(
-                "Pedidos",
-                style: TextStyle(
-                  fontSize: 20, // Tamaño de fuente personalizado
-                  color: const Color.fromARGB(255, 2, 0, 0),
-                ),
-              ),
-              leading: Icon(
-                Icons.assignment,
-                color: Colors.white,
-                size: 35, // Tamaño de icono personalizado
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Pedido()),
-                );
-              },
-            ),
-            ListTile(
-              title: Text(
+              title: const Text(
                 "Insumos",
                 style: TextStyle(
                   fontSize: 20, // Tamaño de fuente personalizado
-                  color: const Color.fromARGB(255, 0, 0, 0),
+                  color: Color.fromARGB(255, 0, 0, 0),
                 ),
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.inventory,
                 color: Colors.white,
                 size: 35, // Tamaño de icono personalizado
@@ -122,14 +103,34 @@ class MyDrawer2 extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text(
+              title: const Text(
+                "Pedidos",
+                style: TextStyle(
+                  fontSize: 20, // Tamaño de fuente personalizado
+                  color: Color.fromARGB(255, 2, 0, 0),
+                ),
+              ),
+              leading: const Icon(
+                Icons.assignment,
+                color: Colors.white,
+                size: 35, // Tamaño de icono personalizado
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Pedido()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text(
                 "Ventas",
                 style: TextStyle(
                   fontSize: 20, // Tamaño de fuente personalizado
-                  color: const Color.fromARGB(255, 10, 0, 0),
+                  color: Color.fromARGB(255, 10, 0, 0),
                 ),
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.attach_money,
                 color: Colors.white,
                 size: 35, // Tamaño de icono personalizado
@@ -142,14 +143,14 @@ class MyDrawer2 extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text(
+              title: const Text(
                 "Cerrar Sesión",
                 style: TextStyle(
                   fontSize: 20, // Tamaño de fuente personalizado
-                  color: const Color.fromARGB(255, 19, 0, 0),
+                  color: Color.fromARGB(255, 19, 0, 0),
                 ),
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.exit_to_app,
                 color: Colors.white,
                 size: 35, // Tamaño de icono personalizado

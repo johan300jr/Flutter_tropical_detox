@@ -36,72 +36,84 @@ class HomePage extends StatelessWidget {
         accessToken: accessToken,
         context: context,
       ),
-      body: Stack(
-        children: [
-          // Título "Tropical Detox"
-          // Imagen de fondo como marca de agua
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Resto del contenido
-                  FractionallySizedBox(
-                    widthFactor: 0.8,
-                    child: _OptionCard(
-                      text: 'Pedidos',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Pedido(),
-                          ),
-                        );
-                      },
-                      color: Color.fromARGB(206, 89, 236, 60), // Color verde suave
-                      imageAsset: 'assets/pedidos1.png', // Imagen para Pedidos
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            // Título "Tropical Detox"
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                  children: [
+                    const SizedBox(height: 30),
+                    // Resto del contenido
+
+                    FractionallySizedBox(
+                      widthFactor: 0.8,
+                      child: _OptionCard(
+                        text: 'Insumos',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Insumo(),
+                            ),
+                          );
+                        },
+                        color: Color.fromARGB(
+                            197, 209, 238, 46), // Color amarillo suave
+                        imageAsset:
+                            'assets/insumos1.png', // Imagen para Insumos
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  FractionallySizedBox(
-                    widthFactor: 0.8,
-                    child: _OptionCard(
-                      text: 'Insumos',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Insumo(),
-                          ),
-                        );
-                      },
-                      color: Color.fromARGB(197, 209, 238, 46), // Color amarillo suave
-                      imageAsset: 'assets/insumos1.png', // Imagen para Insumos
+                    const SizedBox(height: 20),
+
+                    FractionallySizedBox(
+                      widthFactor: 0.8,
+                      child: _OptionCard(
+                        text: 'Pedidos',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Pedido(),
+                            ),
+                          );
+                        },
+                        color: Color.fromARGB(
+                            206, 89, 236, 60), // Color verde suave
+                        imageAsset:
+                            'assets/pedidos1.png', // Imagen para Pedidos
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  FractionallySizedBox(
-                    widthFactor: 0.8,
-                    child: _OptionCard(
-                      text: 'Ventas',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Ventas(),
-                          ),
-                        );
-                      },
-                      color: Color.fromARGB(207, 245, 154, 35), // Color naranja suave
-                      imageAsset: 'assets/ventas1.png', // Imagen para Ventas
+
+                    const SizedBox(height: 20),
+                    FractionallySizedBox(
+                      widthFactor: 0.8,
+                      child: _OptionCard(
+                        text: 'Ventas',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Ventas(),
+                            ),
+                          );
+                        },
+                        color: Color.fromARGB(
+                            207, 245, 154, 35), // Color naranja suave
+                        imageAsset: 'assets/ventas1.png', // Imagen para Ventas
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
